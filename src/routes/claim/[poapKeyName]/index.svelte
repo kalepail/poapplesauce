@@ -53,9 +53,11 @@
   <span>{poap.metadata.code}</span>
   <span>{poap.metadata.issuer}</span>
 
-  {#if claimed}
-    <span class="bg-green-500 text-white px-2 h-8 flex items-center rounded mt-1">Claimed</span>
-  {:else}
-    <button class="bg-black text-white px-2 h-8 flex items-center rounded mt-1" on:click={claim}>{loading ? '...' : 'Claim'}</button>
+  {#if pubkey}
+    {#if claimed}
+      <span class="bg-green-500 text-white px-2 h-8 flex items-center rounded mt-1">Claimed</span>
+    {:else}
+      <button class="bg-black text-white px-2 h-8 flex items-center rounded mt-1" on:click={claim}>{loading ? '...' : 'Claim'}</button>
+    {/if}
   {/if}
 </div>

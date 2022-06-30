@@ -16,7 +16,7 @@
     const { Server } = await import('stellar-sdk')
     const server = new Server(import.meta.env.VITE_HORIZON_URL)
 
-    server
+    if ($session.pubkey) server
     .loadAccount($session.pubkey)
     .then((res) => account.set(res))
   })
@@ -27,6 +27,6 @@
 </svelte:head>
 
 <main class="flex flex-col w-screen h-screen p-2">
-  <Header {poapism} />
+  <Header {poapism} pubkey={$session.pubkey} />
   <slot />
 </main>

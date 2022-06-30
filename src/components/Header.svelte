@@ -1,10 +1,10 @@
 <script>
   import albedo from '@albedo-link/intent'
-  import { session } from '$app/stores'
   
   import { handleResponse } from '../helpers/utils'
 
   export let poapism
+  export let pubkey
 
   function login() {
     return albedo.publicKey()
@@ -35,7 +35,7 @@
   <h1 class="font-bold"><a href="/">{poapism}</a></h1>
 
   <div class="ml-auto">
-    {#if $session.pubkey}
+    {#if pubkey}
       <button on:click={logout}>Logout</button>
     {:else}
       <button on:click={login}>Login</button>

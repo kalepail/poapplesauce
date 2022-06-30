@@ -24,10 +24,6 @@ const config = {
       },
 			enabled: false
 		},
-		// methodOverride: {
-		// 	parameter: '_method',
-		// 	allowed: ['PUT', 'PATCH', 'DELETE']
-		// },
 		vite: {
 			optimizeDeps: {
 				esbuildOptions: {
@@ -42,6 +38,8 @@ const config = {
 				}
 			},
 			build: {
+				minify: false,
+				sourcemap: true,
 				rollupOptions: {
 					plugins: [
 						inject({
