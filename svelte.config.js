@@ -18,6 +18,12 @@ const config = {
   ],
 	kit: {
 		adapter: adapter(),
+		prerender: {
+			onError(err) {
+       console.error(err)
+      },
+			enabled: false
+		},
 		// methodOverride: {
 		// 	parameter: '_method',
 		// 	allowed: ['PUT', 'PATCH', 'DELETE']

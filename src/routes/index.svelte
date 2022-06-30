@@ -1,5 +1,5 @@
 <script>
-export let pubkey
+  export let pubkey
 </script>
 
 {#if pubkey}

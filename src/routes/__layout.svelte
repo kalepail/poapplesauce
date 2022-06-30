@@ -1,24 +1,25 @@
 <script>
-import { session } from '$app/stores'
-import { Server } from 'stellar-sdk'
+  import { session } from '$app/stores'
+  import { onMount } from 'svelte'
 
-import "the-new-css-reset/css/reset.css"
+  import "the-new-css-reset/css/reset.css"
 
-import "../app.css"
+  import "../app.css"
 
-import poapisms from '../helpers/poap.json'
-import Header from "../components/Header.svelte"
-import { account } from '../store/account'
+  import poapisms from '../helpers/poap.json'
+  import Header from "../components/Header.svelte"
+  import { account } from '../store/account'
 
-let poapism = poapisms[Math.floor(Math.random() * poapisms.length)]
+  let poapism = poapisms[Math.floor(Math.random() * poapisms.length)]
 
-const server = new Server(import.meta.env.VITE_HORIZON_URL)
+  onMount(async () => {
+    const { Server } = await import('stellar-sdk')
+    const server = new Server(import.meta.env.VITE_HORIZON_URL)
 
-session.subscribe((s) => {
-  if (s?.pubkey) server
-  .loadAccount(s.pubkey)
-  .then((res) => account.set(res))
-})
+    server
+    .loadAccount($session.pubkey)
+    .then((res) => account.set(res))
+  })
 </script>
 
 <svelte:head>
