@@ -1,3 +1,4 @@
 [x] better error reporting
 [] support for a name and description
 [] cache ipfs images for faster toml lookup
+[] cache toml file
