@@ -22,7 +22,7 @@ export async function post({ request, platform, locals }) {
   }
 }
 
-export async function get({ platform, locals }) {
+export async function get({ platform, url, locals }) {
   const { pubkey } = locals
 
   if (!pubkey) return {
@@ -40,7 +40,8 @@ export async function get({ platform, locals }) {
   return {
     status: 200,
     body: {
-      poaps: keys
+      poaps: keys,
+      origin: url.origin
     }
   }
 }

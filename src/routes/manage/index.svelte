@@ -1,7 +1,8 @@
 <script>
-import { handleResponse } from "../../helpers/utils";
+import { handleResponse } from "../../helpers/utils"
 
 export let poaps
+export let origin
 
 let modalShadow
 let poapPublicKey
@@ -39,7 +40,7 @@ function submit() {
   <ul>
     {#each poaps as poap (poap.name)}
       <li class="flex items-start mb-2">
-        <img class="mr-2" style:max-width="calc(16px * 4)" src="https://ipfs.io/ipfs/{poap.metadata.ipfshash}">
+        <img class="mr-2" style:max-width="calc(16px * 4)" src="{origin}/ipfs/{poap.metadata.ipfshash}">
         <div class="flex flex-col items-start">
           <span>{poap.metadata.code}</span>
           <span>{poap.metadata.issuer}</span>

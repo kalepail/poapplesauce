@@ -7,6 +7,7 @@
   export let poapKeyName
   export let poap
   export let pubkey
+  export let origin
 
   let albedo
   let loading = false
@@ -54,7 +55,7 @@
 
 <h1 class="mb-2">Claim POAP</h1>
 
-<img class="mr-2" style:max-width="calc(16px * 4)" src="https://ipfs.io/ipfs/{poap.metadata.ipfshash}">
+<img class="mr-2 self-start" style:max-width="calc(16px * 4)" src="{origin}/ipfs/{poap.metadata.ipfshash}">
 <div class="flex flex-col items-start">
   <span>{poap.metadata.code}</span>
   <span>{poap.metadata.issuer}</span>

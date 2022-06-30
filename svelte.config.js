@@ -1,6 +1,6 @@
 import preprocess from "svelte-preprocess"
-import adapter from '@sveltejs/adapter-cloudflare'
-// import adapter from '@sveltejs/adapter-cloudflare-workers'
+// import adapter from '@sveltejs/adapter-cloudflare'
+import adapter from '@sveltejs/adapter-cloudflare-workers'
 import inject from '@rollup/plugin-inject'
 import path from 'path'
 

@@ -4,6 +4,7 @@
   import { handleResponse } from "../../helpers/utils";
 
   export let pubkey
+  export let origin
 
   let albedo
   let loading = false
@@ -65,7 +66,7 @@
   </label>
 
   {#if ipfshash}
-    <img class="mb-2" style:max-width="calc(16px * 4)" src="https://ipfs.io/ipfs/{ipfshash}">
+    <img class="mb-2" style:max-width="calc(16px * 4)" src="{origin}/ipfs/{ipfshash}">
   {/if}
 
   <button class="bg-black text-white px-2 h-8 flex items-center rounded disabled:bg-gray-400" disabled={!code || !ipfshash}>{loading ? '...' : 'Mint'}</button>

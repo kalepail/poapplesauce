@@ -1,3 +1,4 @@
+import { StatusError } from "itty-router-extras"
 import { Networks } from "stellar-base"
 
 export async function get({ url, platform }) {
@@ -5,8 +6,11 @@ export async function get({ url, platform }) {
   const { STELLAR_NETWORK, SIGNER_PK, POAP_CODES } = env
 
   const domain = url.host.split('.')
-  const subdomain = domain.shift()
+  const subdomain = domain.shift()?.replace('poap-', '')
   const { keys } = await POAP_CODES.list({prefix: subdomain})
+
+  if (!keys?.length)
+    throw new StatusError(404, 'POAPs Not Found')
 
   let toml = `VERSION="2.1.0"
 
@@ -34,7 +38,7 @@ github="tyvdh"
 ${keys.map((key) => `[[CURRENCIES]]
 code="${key.metadata.code}"
 issuer="${key.metadata.issuer}"
-image="${url.protocol}//${domain.join('.')}/ipfs/${key.metadata.ipfshash}"`
+image="${url.protocol}//poap.${domain.join('.')}/ipfs/${key.metadata.ipfshash}"`
 ).join('\n\n')}
 `
 

@@ -13,6 +13,16 @@ kv_namespaces = [
   { binding = "POAP_CODES", id = "d9729ee754674174b148fece96782106" }
 ]
 
+routes = [
+  "poap.stellar.quest/*",
+  "*.stellar.quest/.well-known/stellar.toml"
+]
+
+[vars]
+HORIZON_URL = "https://horizon-testnet.stellar.org"
+STELLAR_NETWORK = "TESTNET"
+SIGNER_PK = "GD4QUWBI3EIHAA5HSROV5PI7EZAJ5XU5M7EW5PZG4KRIPDCMMM5KRF4Q"
+
 [build]
 command = "pnpm build"
 

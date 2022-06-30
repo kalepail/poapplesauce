@@ -2,9 +2,6 @@ import { Keypair, TransactionBuilder, Account, Networks, Operation } from "stell
 
 import { handleResponse } from '../../helpers/utils'
 
-// TODO
-  // setup dynamic toml files
-
 export async function post({ request, platform, locals }) {
   const { env } = platform
   const { HORIZON_URL, STELLAR_NETWORK, SIGNER_PK } = env
@@ -72,13 +69,14 @@ export async function post({ request, platform, locals }) {
   }
 }
 
-export async function get({ locals }) {
+export async function get({ url, locals }) {
   const { pubkey } = locals
 
   if (pubkey) return {
     status: 200,
     body: {
-      pubkey
+      pubkey,
+      origin: url.origin
     }
   }
   

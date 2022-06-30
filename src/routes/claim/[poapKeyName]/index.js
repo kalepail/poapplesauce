@@ -67,7 +67,7 @@ export async function post({ params, platform, locals }) {
   }
 }
 
-export async function get({ params, platform, locals }) {
+export async function get({ params, url, platform, locals }) {
   const { env } = platform
   const { POAPS } = env
   const { poapKeyName } = params
@@ -84,7 +84,8 @@ export async function get({ params, platform, locals }) {
     body: {
       pubkey: locals.pubkey,
       poapKeyName,
-      poap 
+      poap,
+      origin: url.origin
     }
   }
 }
