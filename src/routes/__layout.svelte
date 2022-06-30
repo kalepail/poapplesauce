@@ -9,15 +9,13 @@
   import poapisms from '../helpers/poap.json'
   import Header from "../components/Header.svelte"
   import { account } from '../store/account'
+  import { handleResponse } from '../helpers/utils';
 
   let poapism = poapisms[Math.floor(Math.random() * poapisms.length)]
 
-  onMount(async () => {
-    const { Server } = await import('stellar-sdk')
-    const server = new Server(import.meta.env.VITE_HORIZON_URL)
-
-    if ($session.pubkey) server
-    .loadAccount($session.pubkey)
+  onMount(() => {
+    if ($session.pubkey) fetch(`${import.meta.env.VITE_HORIZON_URL}/accounts/${$session.pubkey}`)
+    .then(handleResponse)
     .then((res) => account.set(res))
   })
 </script>

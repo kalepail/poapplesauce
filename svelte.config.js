@@ -20,7 +20,7 @@ const config = {
 		adapter: adapter(),
 		prerender: {
 			onError(err) {
-       console.error(err)
+      	console.error(err)
       },
 			enabled: false
 		},
