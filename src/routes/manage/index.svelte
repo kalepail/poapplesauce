@@ -1,37 +1,41 @@
 <script>
-import { handleResponse } from "../../helpers/utils"
+  import { dev } from '$app/env'
 
-export let poaps
-export let origin
+  import { handleResponse } from "../../helpers/utils"
 
-let modalShadow
-let poapPublicKey
-let loading = false
+  export let poaps
+  export let origin
 
-$: addresses = `GCKXWZ4OW4GLT6BLGW7D44KU5KJDUOR4TAKMDZJZKKDPFXUJV7UQDRF7
-GA55XQUTPNYZ5JGRFOYWFOTHRU7RNIDUFKPNCV7VI2LBMYML35DGGHG7
-GCWXR4XDEQVZGOL5NTFILO7XAWABK7P6I26HVTYS7RGCLZOJTOS2GQJD`
+  let modalShadow
+  let poapPublicKey
+  let loading = false
 
-function submit() {
-  loading = true
+  $: addresses = dev 
+  ? `GCKXWZ4OW4GLT6BLGW7D44KU5KJDUOR4TAKMDZJZKKDPFXUJV7UQDRF7
+  GA55XQUTPNYZ5JGRFOYWFOTHRU7RNIDUFKPNCV7VI2LBMYML35DGGHG7
+  GCWXR4XDEQVZGOL5NTFILO7XAWABK7P6I26HVTYS7RGCLZOJTOS2GQJD`
+  : ''
 
-  return fetch('/manage', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json'
-    },
-    body: JSON.stringify({
-      poapPublicKey,
-      addresses: addresses.split('\n')
+  function submit() {
+    loading = true
+
+    return fetch('/manage', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        poapPublicKey,
+        addresses: addresses.split('\n')
+      })
     })
-  })
-  .then(handleResponse)
-  .then(() => {
-    poapPublicKey = null
-    addresses = ''
-  })
-  .finally(() => loading = false)
-}
+    .then(handleResponse)
+    .then(() => {
+      poapPublicKey = null
+      addresses = ''
+    })
+    .finally(() => loading = false)
+  }
 </script>
 
 <h1 class="mb-2">Manage Existing POAPs</h1>

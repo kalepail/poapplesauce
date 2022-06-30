@@ -1,4 +1,5 @@
 <script>
+  import { dev } from '$app/env'
   import { onMount } from "svelte";
 
   import { handleResponse } from "../../helpers/utils";
@@ -9,8 +10,8 @@
   let albedo
   let loading = false
 
-  $: code = 'NFT'
-  $: ipfshash = 'bafkreih6y2dzkizcqbw7piirjvmrolomtuszt6wrg4l5rr56o4ivxcikxy'
+  $: code = dev ? 'NFT' : ''
+  $: ipfshash = dev ? 'bafkreih6y2dzkizcqbw7piirjvmrolomtuszt6wrg4l5rr56o4ivxcikxy' : ''
 
   onMount(async () => {
     albedo = await import('@albedo-link/intent').then((pkg) => pkg.default)
