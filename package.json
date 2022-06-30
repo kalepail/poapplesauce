@@ -3,7 +3,7 @@
 	"type": "module",
 	"scripts": {
 		"start": "NODE_OPTIONS=\"--experimental-vm-modules --no-warnings\" svelte-kit dev",
-		"build": "svelte-kit build",
+		"build": "NODE_OPTIONS=\"--trace-warnings\" svelte-kit build",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
 		"prepare": "svelte-kit sync"
@@ -13,11 +13,11 @@
 		"@albedo-link/signature-verification": "^0.1.2",
 		"@esbuild-plugins/node-globals-polyfill": "^0.1.1",
 		"@rollup/plugin-inject": "^4.0.4",
-		"@sveltejs/adapter-cloudflare": "1.0.0-next.23",
+		"@sveltejs/adapter-cloudflare": "1.0.0-next.24",
 		"@sveltejs/kit": "next",
 		"autoprefixer": "^10.4.7",
 		"buffer": "^6.0.3",
-		"esbuild": "^0.14.47",
+		"esbuild": "^0.14.48",
 		"miniflare": "^2.5.1",
 		"postcss": "^8.4.14",
 		"rollup": "^2.75.7",
