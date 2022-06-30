@@ -19,11 +19,10 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		prerender: {
-			onError: 'continue'
-			// (err) {
-      //  console.error(err)
-      // },
-			// enabled: false
+			onError(err) {
+       console.error(err)
+      },
+			enabled: false
 		},
 		vite: {
 			optimizeDeps: {
