@@ -1,0 +1,61 @@
+<script>
+  import albedo from '@albedo-link/intent'
+  import { handleResponse } from "../../../helpers/utils"
+  import { account } from '../../../store/account'
+
+  export let poapKeyName
+  export let poap
+  export let pubkey
+
+  let loading = false
+  let claimed = false
+
+  account.subscribe((a) => {
+    if (a?.balances?.length) claimed = a.balances.findIndex(({asset_issuer, asset_code}) => 
+      asset_issuer === poap.metadata.issuer 
+      && asset_code === poap.metadata.code
+    ) > -1
+  })
+
+  function claim() {
+    loading = true
+
+    return fetch(`/claim/${poapKeyName}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json'
+      }
+    })
+    .then(handleResponse)
+    .then((xdr) => 
+      albedo.tx({
+        xdr,
+        pubkey: pubkey,
+        network: import.meta.env.VITE_STELLAR_NETWORK, 
+        description: `Claim ${poap.metadata.code} POAP`,
+        submit: false
+      })
+    )
+    .then((res) => fetch(`/claim/${poapKeyName}/xdr`, {
+      method: 'POST',
+      body: JSON.stringify(res)
+    }))
+    .then(handleResponse)
+    .then(() => claimed = true)
+    .finally(() => loading = false)
+  }
+</script>
+
+<h1 class="mb-2">Claim POAP</h1>
+
+<img class="mr-2" style:max-width="calc(16px * 4)" src="https://ipfs.io/ipfs/{poap.metadata.ipfshash}">
+<div class="flex flex-col items-start">
+  <span>{poap.metadata.code}</span>
+  <span>{poap.metadata.issuer}</span>
+
+  {#if claimed}
+    <span class="bg-green-500 text-white px-2 h-8 flex items-center rounded mt-1">Claimed</span>
+  {:else}
+    <button class="bg-black text-white px-2 h-8 flex items-center rounded mt-1" on:click={claim}>{loading ? '...' : 'Claim'}</button>
+  {/if}
+</div>
