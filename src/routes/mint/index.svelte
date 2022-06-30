@@ -1,14 +1,19 @@
 <script>
-  import albedo from '@albedo-link/intent'
+  import { onMount } from "svelte";
 
   import { handleResponse } from "../../helpers/utils";
 
   export let pubkey
 
+  let albedo
   let loading = false
 
   $: code = 'NFT'
   $: ipfshash = 'bafkreih6y2dzkizcqbw7piirjvmrolomtuszt6wrg4l5rr56o4ivxcikxy'
+
+  onMount(async () => {
+    albedo = await import('@albedo-link/intent').then((pkg) => pkg.default)
+  })
 
   function submit() {
     loading = true

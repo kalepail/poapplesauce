@@ -7,3 +7,4 @@ package
 .env.*
 !.env.example
 .mf
+worker-site

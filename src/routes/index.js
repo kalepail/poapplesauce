@@ -1,6 +1,8 @@
 import { serialize } from 'cookie'
-import { verifyMessageSignature } from '@albedo-link/signature-verification'
+import alsv from '@albedo-link/signature-verification'
 import { StatusError } from 'itty-router-extras'
+
+const { verifyMessageSignature } = alsv
 
 export async function post({ request, url, locals }) {
   const { href } = url

@@ -1,5 +1,6 @@
 <script>
-  import albedo from '@albedo-link/intent'
+  import { onMount } from "svelte";
+
   import { handleResponse } from "../../../helpers/utils"
   import { account } from '../../../store/account'
 
@@ -7,8 +8,13 @@
   export let poap
   export let pubkey
 
+  let albedo
   let loading = false
   let claimed = false
+
+  onMount(async () => {
+    albedo = await import('@albedo-link/intent').then((pkg) => pkg.default)
+  })
 
   account.subscribe((a) => {
     if (a?.balances?.length) claimed = a.balances.findIndex(({asset_issuer, asset_code}) => 

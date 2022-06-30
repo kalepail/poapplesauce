@@ -1,5 +1,6 @@
 import preprocess from "svelte-preprocess"
 import adapter from '@sveltejs/adapter-cloudflare'
+// import adapter from '@sveltejs/adapter-cloudflare-workers'
 import inject from '@rollup/plugin-inject'
 import path from 'path'
 
@@ -22,7 +23,7 @@ const config = {
 			onError(err) {
       	console.error(err)
       },
-			enabled: false
+			// enabled: false
 		},
 		vite: {
 			optimizeDeps: {
@@ -43,6 +44,7 @@ const config = {
 				rollupOptions: {
 					plugins: [
 						inject({
+							util: 'util',
 							window: path.resolve('src/helpers/window.js'),
 							Buffer: ['buffer', 'Buffer'],
 						}),

@@ -54,7 +54,7 @@ export default async (_platform: App.Platform) => {
     modules: true,
     envPath: true,
     packagePath: true,
-    wranglerConfigPath: true,
+    wranglerConfigPath: './wrangler-dev.toml',
 
     kvPersist: true,
     cachePersist: true,
