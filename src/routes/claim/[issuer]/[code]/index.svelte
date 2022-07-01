@@ -4,10 +4,21 @@
 
   /** @type {import('./__types/[slug]').Load} */
   export async function load({ fetch, session, props }) {
-    if (session.pubkey)
-      await fetch(`${import.meta.env.VITE_HORIZON_URL}/accounts/${session.pubkey}`)
-      .then(handleResponse)
-      .then((res) => account.set(res))
+    if (
+      session.pubkey
+      && !props.claimed
+    ) await fetch(`${import.meta.env.VITE_HORIZON_URL}/accounts/${session.pubkey}`, {
+      cf: {cacheTtlByStatus: { '200-299': 60 }}
+    })
+    .then(handleResponse)
+    .then((res) => {
+      account.set(res)
+
+      props.claimed = res.balances.findIndex(({asset_issuer, asset_code}) => 
+        asset_issuer === props.poap.metadata.issuer 
+        && asset_code === props.poap.metadata.code
+      ) > -1
+    })
 
     return {
       status: 200,
@@ -26,20 +37,13 @@
   export let code
   export let poap
   export let origin
+  export let claimed
 
   let albedo
   let loading = false
-  let claimed = false
 
   onMount(async () => {
     albedo = await import('@albedo-link/intent').then((pkg) => pkg.default)
-  })
-
-  account.subscribe((a) => {
-    if (a?.balances?.length) claimed = a.balances.findIndex(({asset_issuer, asset_code}) => 
-      asset_issuer === poap.metadata.issuer 
-      && asset_code === poap.metadata.code
-    ) > -1
   })
 
   function claim() {

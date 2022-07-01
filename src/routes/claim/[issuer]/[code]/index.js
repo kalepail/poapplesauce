@@ -71,8 +71,9 @@ export async function post({ params, platform, locals }) {
 
 export async function get({ params, url, platform, locals }) {
   const { env } = platform
-  const { POAP_CODES } = env
+  const { POAP_CODES, POAP_CLAIMS } = env
   const { issuer, code } = params
+  const { pubkey } = locals
 
   const poap = await POAP_CODES.getWithMetadata(`${code}:${issuer}`)
 
@@ -81,13 +82,16 @@ export async function get({ params, url, platform, locals }) {
     || !poap?.value
   ) throw new StatusError(404, 'POAP Not Found')
 
+  const claimed = !!await POAP_CLAIMS.get(`${pubkey}:${issuer}`)
+
   return {
     status: 200,
     body: {
-      pubkey: locals.pubkey,
+      pubkey,
       issuer,
       code,
       poap,
+      claimed,
       origin: url.origin
     }
   }
