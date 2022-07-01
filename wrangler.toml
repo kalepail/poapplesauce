@@ -2,7 +2,7 @@ name = "poapplesauce"
 main = "worker-site/worker.mjs"
 usage_model = "bundled"
 compatibility_flags = []
-workers_dev = true
+workers_dev = false
 compatibility_date = "2022-06-30"
 
 kv_namespaces = [

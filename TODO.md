@@ -1,9 +1,13 @@
 ## Next
+- [ ] fully follow [SEP39](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0039.md) best practices 
+  - [ ] issue many nfts from the same address
+  - [ ] use [EIP-721](https://eips.ethereum.org/EIPS/eip-721) json vs an image for the `ipfshash`
+  - [ ] fill out toml more fully
+- [ ] support for a name and description
 - [ ] surface errors to the client
 - [ ] look at using load for redirects vs window.reload
 
 ## Someday
-- [ ] support for a name and description
 - [ ] List of claimed poaps
 - [ ] List of pending poap claims
 - [ ] Clawback claimed poaps
