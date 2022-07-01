@@ -40,7 +40,10 @@
 </script>
 
 <header class="flex mb-2">
-  <h1 class="font-bold"><a href="/">{poapism}</a></h1>
+  <h1 class="font-bold">
+    <a href="/">{poapism}</a>
+    <span class="text-xs bg-black text-white rounded-full px-2 py-1">{import.meta.env.VITE_STELLAR_NETWORK}</span>
+  </h1>
 
   <div class="ml-auto">
     {#if pubkey}

@@ -40,7 +40,7 @@
       albedo.tx({
         xdr,
         pubkey: pubkey,
-        network: import.meta.env.VITE_STELLAR_NETWORK, 
+        network: import.meta.env.VITE_STELLAR_NETWORK,
         description: `Claim ${poap.metadata.code} POAP`,
         submit: false
       })
