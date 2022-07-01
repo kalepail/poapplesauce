@@ -13,13 +13,19 @@ const gateways = [
 
 export default function getIPFS(cid) {
   const controllers = []
-  const promises = gateways.map((gateway) => {
+  const promises = gateways.map(async (gateway) => {
+    const request = `${gateway}/${cid}`
+
     const controller = new AbortController()
     const { signal } = controller
 
     controllers.push(controller)
 
-    return fetch(`${gateway}/${cid}`, { signal })
+    return fetch(request, { 
+      method: 'HEAD',
+      cf: {cacheTtlByStatus: { '200-299': 3600 }},
+      signal
+    })
     .then((res) => {
       if (res.ok) {
         controllers.forEach((c) => {
@@ -27,8 +33,13 @@ export default function getIPFS(cid) {
             c.abort()
         })
 
-        return res.arrayBuffer()
+        return fetch(request, {cf: {cacheTtlByStatus: { '200-299': 86400 }}})
       } throw res
+    })
+    .then((res) => {
+      if (res.ok)
+        return res.arrayBuffer()
+      throw res
     })
   })
 

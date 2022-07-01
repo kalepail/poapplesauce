@@ -50,24 +50,18 @@ export async function post({ request, platform }) {
   })
   .then(handleResponse)
 
-  const now = Date.now()
+  const metadata = {
+    author: userPublicKey,
+    issuer: poapPublicKey,
+    code,
+    ipfshash,
+    hash,
+    date: Date.now()
+  }
 
   await Promise.all([
-    POAPS.put(`${userPublicKey}:${poapPublicKey}`, hash, {metadata: {
-      author: userPublicKey,
-      issuer: poapPublicKey,
-      code,
-      ipfshash,
-      hash,
-      date: now
-    }}),
-  
-    POAP_CODES.put(`${code.toLowerCase()}:${poapPublicKey}`, 'OK', {metadata: {
-      issuer: poapPublicKey,
-      code,
-      ipfshash,
-      date: now
-    }})
+    POAPS.put(`${userPublicKey}:${poapPublicKey}`, hash, { metadata }),
+    POAP_CODES.put(`${code.toLowerCase()}:${poapPublicKey}`, 'OK', { metadata })
   ])
 
   return {

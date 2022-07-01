@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body,
+html {
+  height: -moz-available;
+  height: -webkit-fill-available;
+  height: stretch;
+}

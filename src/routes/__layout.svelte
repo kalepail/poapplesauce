@@ -14,9 +14,10 @@
   let poapism = $session.poapism
 
   onMount(() => {
-    if ($session.pubkey) fetch(`${import.meta.env.VITE_HORIZON_URL}/accounts/${$session.pubkey}`)
+    if ($session.pubkey) return fetch(`${import.meta.env.VITE_HORIZON_URL}/accounts/${$session.pubkey}`)
     .then(handleResponse)
     .then((res) => account.set(res))
+    .catch((err) => console.error(err))
   })
 </script>
 
@@ -24,7 +25,16 @@
   <title>{poapism}</title>
 </svelte:head>
 
-<main class="flex flex-col w-screen h-screen p-2">
+<main class="flex flex-col w-screen p-2">
   <Header {poapism} {pubkey} />
   <slot />
 </main>
+
+<style>
+  main {
+    min-height: 100vh;
+    min-height: -moz-available;
+    min-height: -webkit-fill-available;
+    min-height: stretch;
+  }
+</style>

@@ -12,8 +12,8 @@
 
   $: addresses = dev 
   ? `GCKXWZ4OW4GLT6BLGW7D44KU5KJDUOR4TAKMDZJZKKDPFXUJV7UQDRF7
-  GA55XQUTPNYZ5JGRFOYWFOTHRU7RNIDUFKPNCV7VI2LBMYML35DGGHG7
-  GCWXR4XDEQVZGOL5NTFILO7XAWABK7P6I26HVTYS7RGCLZOJTOS2GQJD`
+GA55XQUTPNYZ5JGRFOYWFOTHRU7RNIDUFKPNCV7VI2LBMYML35DGGHG7
+GCWXR4XDEQVZGOL5NTFILO7XAWABK7P6I26HVTYS7RGCLZOJTOS2GQJD`
   : ''
 
   function submit() {
@@ -50,7 +50,7 @@
           <span>{poap.metadata.issuer}</span>
 
           <div class="flex mt-1">
-            <a class="bg-black text-white px-2 h-8 flex items-center rounded mr-2" href="/claim/{poap.name}">Claim Link</a>
+            <a class="bg-black text-white px-2 h-8 flex items-center rounded mr-2" href="/claim/{poap.metadata.issuer}/{poap.metadata.code.toLowerCase()}">Claim Link</a>
             <button class="bg-black text-white px-2 h-8 flex items-center rounded" on:click={() => poapPublicKey = poap.metadata.issuer}>✨🌈</button>
           </div>
         </div>

@@ -1,22 +1,21 @@
 import { TransactionBuilder, Account, Networks, Operation, Asset } from "stellar-base"
 import { StatusError } from 'itty-router-extras'
 
-import { handleResponse } from "../../../helpers/utils"
+import { handleResponse } from "../../../../helpers/utils"
 
 export async function post({ params, platform, locals }) {
   const { env } = platform
-  const { HORIZON_URL, STELLAR_NETWORK, POAPS, POAP_LISTS } = env
-  const { poapKeyName } = params
-  const [ authorPublicKey, issuerPublicKey ] = poapKeyName.split(':')
+  const { HORIZON_URL, STELLAR_NETWORK, POAP_CODES, POAP_LISTS } = env
+  const { issuer, code } = params
   const userPublicKey = locals.pubkey
 
-  const addresses = await POAP_LISTS.get(issuerPublicKey, {type: 'json'})
+  const addresses = await POAP_LISTS.get(issuer, {type: 'json'})
 
   if (!addresses?.includes(userPublicKey))
     throw new StatusError(401, 'POAP Claim Unauthorized')
 
-  const poap = await POAPS.getWithMetadata(poapKeyName)
-  const POAP = new Asset(poap.metadata.code, issuerPublicKey)
+  const poap = await POAP_CODES.getWithMetadata(`${code}:${issuer}`)
+  const POAP = new Asset(poap.metadata.code, issuer)
 
   const transaction = await fetch(`${HORIZON_URL}/accounts/${userPublicKey}`)
   .then(handleResponse)
@@ -39,13 +38,13 @@ export async function post({ params, platform, locals }) {
       flags: {
         authorized: true
       },
-      source: issuerPublicKey
+      source: issuer
     }))
     .addOperation(Operation.payment({
       destination: userPublicKey,
       asset: POAP,
       amount: '0.0000001',
-      source: issuerPublicKey
+      source: issuer
     }))
     .addOperation(Operation.setTrustLineFlags({
       trustor: userPublicKey,
@@ -53,7 +52,7 @@ export async function post({ params, platform, locals }) {
       flags: {
         authorized: false
       },
-      source: issuerPublicKey
+      source: issuer
     }))
     .setTimeout(0)
     .build()
@@ -69,10 +68,10 @@ export async function post({ params, platform, locals }) {
 
 export async function get({ params, url, platform, locals }) {
   const { env } = platform
-  const { POAPS } = env
-  const { poapKeyName } = params
+  const { POAP_CODES } = env
+  const { issuer, code } = params
 
-  const poap = await POAPS.getWithMetadata(poapKeyName)
+  const poap = await POAP_CODES.getWithMetadata(`${code}:${issuer}`)
 
   if (
     !poap?.metadata 
@@ -83,7 +82,8 @@ export async function get({ params, url, platform, locals }) {
     status: 200,
     body: {
       pubkey: locals.pubkey,
-      poapKeyName,
+      issuer,
+      code,
       poap,
       origin: url.origin
     }

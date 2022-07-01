@@ -1,12 +1,13 @@
 <script>
   import { onMount } from "svelte";
 
-  import { handleResponse } from "../../../helpers/utils"
-  import { account } from '../../../store/account'
+  import { handleResponse } from "../../../../helpers/utils"
+  import { account } from '../../../../store/account'
 
-  export let poapKeyName
-  export let poap
   export let pubkey
+  export let issuer
+  export let code
+  export let poap
   export let origin
 
   let albedo
@@ -27,7 +28,7 @@
   function claim() {
     loading = true
 
-    return fetch(`/claim/${poapKeyName}`, {
+    return fetch(`/claim/${issuer}/${code}`, {
       method: 'POST',
       headers: {
         Accept: 'application/json'
@@ -43,7 +44,7 @@
         submit: false
       })
     )
-    .then((res) => fetch(`/claim/${poapKeyName}/xdr`, {
+    .then((res) => fetch(`/claim/${issuer}/${code}/xdr`, {
       method: 'POST',
       body: JSON.stringify(res)
     }))
