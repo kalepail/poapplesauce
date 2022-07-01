@@ -57,10 +57,12 @@ export async function get({ request, url, locals, platform }) {
   // const stub = DO.get(id)
   // const res = await stub.fetch(url)
 
+  const { pubkey } = locals
+
   return {
     status: 200,
     body: {
-      pubkey: locals.pubkey
+      pubkey
     }
   }
 }

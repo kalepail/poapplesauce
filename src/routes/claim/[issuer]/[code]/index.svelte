@@ -1,8 +1,24 @@
+<script context="module">
+  import { account } from '../../../../store/account'
+  import { handleResponse } from '../../../../helpers/utils'
+
+  /** @type {import('./__types/[slug]').Load} */
+  export async function load({ fetch, session, props }) {
+    if (session.pubkey)
+      await fetch(`${import.meta.env.VITE_HORIZON_URL}/accounts/${session.pubkey}`)
+      .then(handleResponse)
+      .then((res) => account.set(res))
+
+    return {
+      status: 200,
+      props
+    }
+  }
+</script>
+
 <script>
   import { onMount } from "svelte";
 
-  import { handleResponse } from "../../../../helpers/utils"
-  import { account } from '../../../../store/account'
   import { login } from '../../../../components/Header.svelte'
 
   export let pubkey

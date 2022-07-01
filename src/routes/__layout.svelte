@@ -1,16 +1,9 @@
 <script context="module">
-  import { handleResponse } from '../helpers/utils'
-
   /** @type {import('./__types/[slug]').Load} */
-  export async function load({ url, fetch, session }) {
-    const acc = session.pubkey 
-    ? await fetch(`${import.meta.env.VITE_HORIZON_URL}/accounts/${session.pubkey}`).then(handleResponse)
-    : null
-
+  export async function load({ url, session }) {
     return {
       status: 200,
       props: {
-        acc,
         pubkey: session.pubkey,
         poapism: session.poapism,
         origin: url.origin
@@ -25,14 +18,10 @@
   import "../app.css"
   
   import Header from "../components/Header.svelte"
-  import { account } from '../store/account'
 
-  export let acc
   export let pubkey
   export let poapism
   export let origin
-
-  account.set(acc)
 </script>
 
 <svelte:head>

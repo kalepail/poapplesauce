@@ -1,7 +1,7 @@
 ## Next
 
 ## Someday
-- [ ] Use poap claims KV to block reclaims
+- [ ] look at using load for redirects vs window.reload
 - [ ] support for a name and description
 - [ ] List of claimed poaps
 - [ ] List of pending poap claims
@@ -15,3 +15,4 @@
 - [x] cache ipfs images
 - [x] cache toml file
 - [x] fill out the README
+- [x] Use poap claims KV to block reclaims

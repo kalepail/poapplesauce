@@ -18,8 +18,6 @@ const mode = argv.includes('build')
 	: 'testnet'
 : 'development'
 
-console.log(mode)
-
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	preprocess: [
