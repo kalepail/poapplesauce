@@ -27,6 +27,7 @@ export async function handle({ event, resolve }) {
     if (
       method === 'GET' 
       && headers.get('cache-control')
+      && url.href.indexOf('.js') === -1
     ) context.waitUntil(cache.put(url, response.clone()))
   } catch (err) {
     response = error(err.status, err.message || err)

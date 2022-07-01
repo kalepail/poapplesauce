@@ -23,7 +23,7 @@ const config = {
 			onError(err) {
       	console.error(err)
       },
-			// enabled: false
+			enabled: false
 		},
 		vite: {
 			optimizeDeps: {

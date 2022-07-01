@@ -1,18 +1,7 @@
-<script>
-  import { onMount } from 'svelte'
-  
-  import { handleResponse } from '../helpers/utils'
-
-  export let poapism
-  export let pubkey
-
+<script context="module">
   let albedo
 
-  onMount(async () => {
-    albedo = await import('@albedo-link/intent').then((pkg) => pkg.default)
-  })
-
-  function login() {
+  export function login() {
     return albedo.publicKey()
     .then((res) => fetch('/', {
       method: 'POST',
@@ -24,6 +13,19 @@
     .then(handleResponse)
     .then(() => location.reload())
   }
+</script>
+
+<script>
+  import { onMount } from 'svelte'
+  
+  import { handleResponse } from '../helpers/utils'
+
+  export let poapism
+  export let pubkey
+
+  onMount(async () => {
+    albedo = await import('@albedo-link/intent').then((pkg) => pkg.default)
+  })
   
   function logout() {
     return fetch('/', {

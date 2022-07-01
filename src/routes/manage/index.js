@@ -25,23 +25,25 @@ export async function post({ request, platform, locals }) {
 export async function get({ platform, url, locals }) {
   const { pubkey } = locals
 
-  if (!pubkey) return {
-    status: 307,
-    headers: {
-      Location: '/'
+  if (pubkey) {
+    const { env } = platform
+    const { POAPS } = env
+
+    const { keys } = await POAPS.list({prefix: pubkey})
+    
+    return {
+      status: 200,
+      body: {
+        poaps: keys,
+        origin: url.origin
+      }
     }
   }
 
-  const { env } = platform
-  const { POAPS } = env
-
-  const { keys } = await POAPS.list({prefix: pubkey})
-  
   return {
-    status: 200,
-    body: {
-      poaps: keys,
-      origin: url.origin
+    status: 307,
+    headers: {
+      Location: '/'
     }
   }
 }

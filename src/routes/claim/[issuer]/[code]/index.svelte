@@ -3,6 +3,7 @@
 
   import { handleResponse } from "../../../../helpers/utils"
   import { account } from '../../../../store/account'
+  import { login } from '../../../../components/Header.svelte'
 
   export let pubkey
   export let issuer
@@ -67,5 +68,7 @@
     {:else}
       <button class="bg-black text-white px-2 h-8 flex items-center rounded mt-1" on:click={claim}>{loading ? '...' : 'Claim'}</button>
     {/if}
+  {:else}
+    <button class="bg-black text-white px-2 h-8 flex items-center rounded mt-1" on:click={login}>Login</button>
   {/if}
 </div>

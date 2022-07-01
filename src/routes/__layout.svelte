@@ -1,24 +1,35 @@
-<script>
-  import { session } from '$app/stores'
-  import { onMount } from 'svelte'
+<script context="module">
+  import { handleResponse } from '../helpers/utils'
 
+  /** @type {import('./__types/[slug]').Load} */
+  export async function load({ fetch, session }) {
+    const acc = await fetch(`${import.meta.env.VITE_HORIZON_URL}/accounts/${session.pubkey}`)
+    .then(handleResponse)
+
+    return {
+      status: 200,
+      props: {
+        acc,
+        pubkey: session.pubkey,
+        poapism: session.poapism,
+      }
+    }
+  }
+</script>
+
+<script>
   import "the-new-css-reset/css/reset.css"
 
   import "../app.css"
   
   import Header from "../components/Header.svelte"
   import { account } from '../store/account'
-  import { handleResponse } from '../helpers/utils';
 
-  let pubkey = $session.pubkey
-  let poapism = $session.poapism
+  export let acc
+  export let pubkey
+  export let poapism
 
-  onMount(() => {
-    if ($session.pubkey) return fetch(`${import.meta.env.VITE_HORIZON_URL}/accounts/${$session.pubkey}`)
-    .then(handleResponse)
-    .then((res) => account.set(res))
-    .catch((err) => console.error(err))
-  })
+  account.set(acc)
 </script>
 
 <svelte:head>
