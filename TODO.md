@@ -4,3 +4,4 @@
 - [ ] cache toml file
 - [ ] fill out the README
 - [ ] support self claims (right now you get bad auth extra)
+- [ ] call head on ipfs routes before calling get (to save on bandwidth)
