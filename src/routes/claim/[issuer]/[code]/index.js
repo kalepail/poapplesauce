@@ -5,9 +5,12 @@ import { handleResponse } from "../../../../helpers/utils"
 
 export async function post({ params, platform, locals }) {
   const { env } = platform
-  const { HORIZON_URL, STELLAR_NETWORK, POAP_CODES, POAP_LISTS } = env
+  const { HORIZON_URL, STELLAR_NETWORK, POAP_CODES, POAP_LISTS, POAP_CLAIMS } = env
   const { issuer, code } = params
   const userPublicKey = locals.pubkey
+
+  if (await POAP_CLAIMS.get(`${userPublicKey}:${issuer}`))
+    throw new StatusError(401, 'POAP Already Claimed')
 
   const addresses = await POAP_LISTS.get(issuer, {type: 'json'})
 

@@ -1,5 +1,4 @@
 ## Next
-- [ ] fill out the README
 
 ## Someday
 - [ ] Use poap claims KV to block reclaims
@@ -15,3 +14,4 @@
 - [x] call HEAD on ipfs routes before calling get (to save on bandwidth)
 - [x] cache ipfs images
 - [x] cache toml file
+- [x] fill out the README
