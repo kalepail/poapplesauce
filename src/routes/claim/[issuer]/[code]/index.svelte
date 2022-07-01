@@ -19,6 +19,11 @@
         && asset_code === props.poap.metadata.code
       ) > -1
     })
+    .catch((err) => {
+      if (err.status === 404) // Don't catch instances where the address hasn't been created yet
+        return
+      throw err
+    })
 
     return {
       status: 200,

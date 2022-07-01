@@ -1,7 +1,8 @@
 ## Next
+- [ ] surface errors to the client
+- [ ] look at using load for redirects vs window.reload
 
 ## Someday
-- [ ] look at using load for redirects vs window.reload
 - [ ] support for a name and description
 - [ ] List of claimed poaps
 - [ ] List of pending poap claims
