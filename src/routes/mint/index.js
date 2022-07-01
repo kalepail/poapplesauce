@@ -2,7 +2,7 @@ import { Keypair, TransactionBuilder, Account, Networks, Operation } from "stell
 
 import { handleResponse } from '../../helpers/utils'
 
-export async function post({ request, platform, locals }) {
+export async function post({ request, url, platform, locals }) {
   const { env } = platform
   const { HORIZON_URL, STELLAR_NETWORK, SIGNER_PK } = env
   const body = await request.json()
@@ -37,7 +37,7 @@ export async function post({ request, platform, locals }) {
       source: poapPublicKey
     }))
     .addOperation(Operation.setOptions({
-      homeDomain: `poap-${body.code.toLowerCase()}.stellar.quest`,
+      homeDomain: `${body.code.toLowerCase()}-${url.host}`, // `poap-${body.code.toLowerCase()}.stellar.quest`,
       signer: {
         ed25519PublicKey: SIGNER_PK,
         weight: 1

@@ -6,8 +6,8 @@ export async function get({ url, platform }) {
   const { STELLAR_NETWORK, SIGNER_PK, POAP_CODES } = env
 
   const domain = url.host.split('.')
-  const subdomain = domain.shift()?.replace('poap-', '')
-  const { keys } = await POAP_CODES.list({prefix: subdomain})
+  const code = domain.shift()?.replace('-poap', '')
+  const { keys } = await POAP_CODES.list({prefix: `${code}:`})
 
   if (!keys?.length)
     throw new StatusError(404, 'POAPs Not Found')

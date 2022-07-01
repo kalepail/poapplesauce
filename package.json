@@ -7,7 +7,9 @@
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
 		"prepare": "svelte-kit sync",
-		"deploy": "wrangler publish"
+		"deploy": "wrangler publish",
+		"deploy:dev": "wrangler publish --env testnet",
+		"deploy:all": "pnpm run deploy && pnpm deploy:dev"
 	},
 	"devDependencies": {
 		"@albedo-link/intent": "^0.12.0",

@@ -29,7 +29,7 @@ export async function get({ platform, url, locals }) {
     const { env } = platform
     const { POAPS } = env
 
-    const { keys } = await POAPS.list({prefix: pubkey})
+    const { keys } = await POAPS.list({prefix: `${pubkey}:`})
     
     return {
       status: 200,
