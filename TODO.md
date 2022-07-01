@@ -3,3 +3,4 @@
 - [ ] cache ipfs images for faster toml lookup
 - [ ] cache toml file
 - [ ] fill out the README
+- [ ] support self claims (right now you get bad auth extra)

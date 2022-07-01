@@ -1,5 +1,4 @@
 name = "poapplesauce"
-type = "javascript"
 main = "worker-site/worker.mjs"
 usage_model = "bundled"
 compatibility_flags = []
@@ -25,9 +24,6 @@ SIGNER_PK = "GD4QUWBI3EIHAA5HSROV5PI7EZAJ5XU5M7EW5PZG4KRIPDCMMM5KRF4Q"
 
 [build]
 command = "pnpm build"
-
-[build.upload]
-format = "modules"
 
 [site]
 bucket = ".svelte-kit/assets"

@@ -46,6 +46,7 @@ image="${url.protocol}//poap.${domain.join('.')}/ipfs/${key.metadata.ipfshash}"`
     status: 200,
     header: {
       'Content-Type': 'text/plain',
+      'Access-Control-Allow-Origin': '*',
       'Cache-Control': 'public, max-age=3600' // 1 hour
     },
     body: toml,
