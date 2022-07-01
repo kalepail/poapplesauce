@@ -10,6 +10,9 @@ import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfil
 // import nodePolyfills from 'rollup-plugin-polyfill-node';
 // import nodeResolve from '@rollup/plugin-node-resolve';
 
+const argv = process.argv.slice(2)
+const mode = argv.length === 1 && argv.includes('build') ? 'production' : 'testnet'
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	preprocess: [
@@ -26,6 +29,7 @@ const config = {
 			enabled: false
 		},
 		vite: {
+			mode,
 			optimizeDeps: {
 				esbuildOptions: {
 					define: {

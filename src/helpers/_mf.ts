@@ -52,7 +52,7 @@ export default async (_platform: App.Platform) => {
   const { Miniflare } = await import('miniflare')
   const mf = new Miniflare({
     modules: true,
-    envPath: true,
+    envPath: './.env.local',
     packagePath: true,
     wranglerConfigPath: './wrangler-dev.toml',
 

@@ -4,6 +4,7 @@
 	"scripts": {
 		"start": "NODE_OPTIONS=\"--experimental-vm-modules --no-warnings\" svelte-kit dev --host",
 		"build": "NODE_OPTIONS=\"--trace-warnings\" svelte-kit build",
+		"build:dev": "pnpm build testnet",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
 		"prepare": "svelte-kit sync",
