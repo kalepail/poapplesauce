@@ -9,7 +9,7 @@ export async function handle({ event, resolve }) {
   const { request, url, platform, locals } = event
   const { method, headers } = request
   const cookies = parse(headers.get('cookie') || '')
-  
+
   event.platform = await cloudflareAdapterPlatform(platform)
 	locals.pubkey = cookies.pubkey
 
@@ -23,11 +23,20 @@ export async function handle({ event, resolve }) {
 
   try {
     response = await resolve(event)
+    const { headers: h } = response
 
     if (
       method === 'GET' 
-      && headers.get('cache-control')
-      && url.href.indexOf('.js') === -1
+      && h.get('cache-control')
+      && h.get('cache-control') !== 'no-cache'
+      && h.get('pragma') !== 'no-cache'
+      && (
+        !h.get('content-type')
+        || (
+          h.get('content-type')?.indexOf('html') === -1
+          && h.get('content-type')?.indexOf('javascript') === -1
+        )
+      )
     ) context.waitUntil(cache.put(url, response.clone()))
   } catch (err) {
     response = error(err.status, err.message || err)

@@ -2,9 +2,10 @@
   import { handleResponse } from '../helpers/utils'
 
   /** @type {import('./__types/[slug]').Load} */
-  export async function load({ fetch, session }) {
-    const acc = await fetch(`${import.meta.env.VITE_HORIZON_URL}/accounts/${session.pubkey}`)
-    .then(handleResponse)
+  export async function load({ url, fetch, session }) {
+    const acc = session.pubkey 
+    ? await fetch(`${import.meta.env.VITE_HORIZON_URL}/accounts/${session.pubkey}`).then(handleResponse)
+    : null
 
     return {
       status: 200,
@@ -12,6 +13,7 @@
         acc,
         pubkey: session.pubkey,
         poapism: session.poapism,
+        origin: url.origin
       }
     }
   }
@@ -28,12 +30,14 @@
   export let acc
   export let pubkey
   export let poapism
+  export let origin
 
   account.set(acc)
 </script>
 
 <svelte:head>
   <title>{poapism}</title>
+  <link rel="icon" href="{origin}/favicon.png" />
 </svelte:head>
 
 <main class="flex flex-col w-screen p-2">
