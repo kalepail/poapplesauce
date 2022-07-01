@@ -11,7 +11,14 @@ import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfil
 // import nodeResolve from '@rollup/plugin-node-resolve';
 
 const argv = process.argv.slice(2)
-const mode = argv.length === 1 && argv.includes('build') ? 'production' : 'testnet'
+
+const mode = argv.includes('build')
+? argv.length === 1
+	? 'production'
+	: 'testnet'
+: 'development'
+
+console.log(mode)
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {

@@ -1,10 +1,10 @@
 compatibility_date = "2022-06-06"
 
 kv_namespaces = [
-  { binding = "POAPS", id = "", preview_id = "" },
-  { binding = "POAP_LISTS", id = "", preview_id = "" },
-  { binding = "POAP_CLAIMS", id = "", preview_id = "" },
-  { binding = "POAP_CODES", id = "", preview_id = "" },
+  { binding = "POAPS" },
+  { binding = "POAP_LISTS" },
+  { binding = "POAP_CLAIMS" },
+  { binding = "POAP_CODES" },
 ]
 
 # [durable_objects]
