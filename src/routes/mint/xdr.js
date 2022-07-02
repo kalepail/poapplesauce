@@ -47,8 +47,9 @@ export async function post({ request, platform }) {
 
   // TEMP TO ENSURE SAFETY
   ////
-  if (STELLAR_NETWORK === 'PUBLIC')
-    throw new StatusError(401, `Address ${userPublicKey} Not Allowed`)
+  // SAFE WHILE WE HAVE CF ZERO TRUST
+  // if (STELLAR_NETWORK === 'PUBLIC')
+  //   throw new StatusError(401, `Address ${userPublicKey} Not Allowed`)
   ////
 
   const { hash } = await fetch(`${HORIZON_URL}/transactions`, {
