@@ -4,7 +4,9 @@ import { StatusError } from 'itty-router-extras'
 
 const { verifyMessageSignature } = alsv
 
-export async function post({ request, url, locals }) {
+export async function post({ request, url, platform, locals }) {
+  const { env } = platform
+  const { NODE_ENV } = env
   const { href } = url
   const body = await request.json()
 
@@ -27,8 +29,8 @@ export async function post({ request, url, locals }) {
         path: '/',
         httpOnly: true,
         sameSite: 'strict',
-        secure: process.env.NODE_ENV === 'production',
-        maxAge: 60 * 60 * 24 * 7, // one week
+        secure: NODE_ENV === 'production',
+        maxAge: 60 * 60 * 24 * 7, // 1 week
       })
     }
   }

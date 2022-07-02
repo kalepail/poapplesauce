@@ -1,3 +1,4 @@
+import { StatusError } from "itty-router-extras"
 import { Keypair, Transaction, Networks } from "stellar-base"
 
 import { handleResponse } from "../../helpers/utils"
@@ -43,6 +44,12 @@ export async function post({ request, platform }) {
 
   const txBody = new FormData()
         txBody.append('tx', transaction.toXDR())
+
+  // TEMP TO ENSURE SAFETY
+  ////
+  if (STELLAR_NETWORK === 'PUBLIC')
+    throw new StatusError(401, `Address ${userPublicKey} Not Allowed`)
+  ////
 
   const { hash } = await fetch(`${HORIZON_URL}/transactions`, {
     method: 'POST',
