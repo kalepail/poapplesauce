@@ -1,6 +1,6 @@
 import { Keypair, TransactionBuilder, Account, Networks, Operation } from "stellar-base"
 
-import { handleResponse } from '../../helpers/utils'
+import { handleResponse } from '@/helpers/utils'
 
 export async function post({ request, url, platform, locals }) {
   const { env } = platform

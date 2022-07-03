@@ -1,7 +1,9 @@
-import { StatusError } from "itty-router-extras"
+// import { StatusError } from "itty-router-extras"
 import { Keypair, Transaction, Networks } from "stellar-base"
+import { fileTypeFromBuffer } from 'file-type/core'
 
-import { handleResponse } from "../../helpers/utils"
+import { handleResponse } from "@/helpers/utils"
+import getIPFS from '@/helpers/getIPFS'
 
 export async function post({ request, platform }) {
   const { env } = platform
@@ -40,6 +42,9 @@ export async function post({ request, platform }) {
     }
   })
 
+  const buffer = new Uint8Array(await getIPFS(ipfshash))
+  const { ext, mime } = await fileTypeFromBuffer(buffer)
+
   transaction.sign(poapKeypair)
 
   const txBody = new FormData()
@@ -64,6 +69,8 @@ export async function post({ request, platform }) {
     code,
     ipfshash,
     hash,
+    ext,
+    mime,
     date: Date.now()
   }
 

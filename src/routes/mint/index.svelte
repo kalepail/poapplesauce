@@ -2,7 +2,7 @@
   import { dev } from '$app/env'
   import { onMount } from "svelte";
 
-  import { handleResponse } from "../../helpers/utils";
+  import { handleResponse } from "@/helpers/utils";
 
   export let pubkey
   export let origin

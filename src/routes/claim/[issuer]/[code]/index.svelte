@@ -1,6 +1,6 @@
 <script context="module">
-  import { account } from '../../../../store/account'
-  import { handleResponse } from '../../../../helpers/utils'
+  import { account } from '@/store/account'
+  import { handleResponse } from '@/helpers/utils'
 
   /** @type {import('./__types/[slug]').Load} */
   export async function load({ fetch, session, props }) {
@@ -35,7 +35,7 @@
 <script>
   import { onMount } from "svelte";
 
-  import { login } from '../../../../components/Header.svelte'
+  import { login } from '@/components/Header.svelte'
 
   export let pubkey
   export let issuer

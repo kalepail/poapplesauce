@@ -1,12 +1,5 @@
-import getIPFS from '../../helpers/getIPFS'
+import * as page from './[cid].[ext]'
 
-export async function get({ params }) {
-  return {
-    status: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Cache-Control': 'public, max-age=86400' // 1 day
-    },
-    body: new Uint8Array(await getIPFS(params.cid))
-  }
+export async function get(event) {
+  return page.get(event)
 }

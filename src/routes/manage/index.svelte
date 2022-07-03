@@ -1,7 +1,7 @@
 <script>
   import { dev } from '$app/env'
 
-  import { handleResponse } from "../../helpers/utils"
+  import { handleResponse } from "@/helpers/utils"
 
   export let poaps
   export let origin

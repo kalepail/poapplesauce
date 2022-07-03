@@ -23,8 +23,8 @@ ACCOUNTS=[
 
 [DOCUMENTATION]
 ORG_NAME="Stellar POAPs"
-ORG_URL="https://poap.stellar.org"
-ORG_LOGO="https://poap.stellar.org/favicon.png"
+ORG_URL="https://poap.stellar.quest"
+ORG_LOGO="https://poap.stellar.quest/favicon.png"
 ORG_OFFICIAL_EMAIL="ecosystem@stellar.org"
 ORG_SUPPORT_EMAIL="ecosystem@stellar.org"
 
@@ -38,7 +38,7 @@ github="tyvdh"
 ${keys.map((key) => `[[CURRENCIES]]
 code="${key.metadata.code}"
 issuer="${key.metadata.issuer}"
-image="${url.protocol}//poap.${domain.join('.')}/ipfs/${key.metadata.ipfshash}"`
+image="${url.protocol}//poap.${domain.join('.')}/ipfs/${key.metadata.ipfshash}.${key.metadata.ext}"`
 ).join('\n\n')}
 `
 

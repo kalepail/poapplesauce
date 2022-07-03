@@ -1,7 +1,9 @@
 import { TransactionBuilder, Account, Networks, Operation, Asset } from "stellar-base"
+import { fileTypeFromBuffer } from 'file-type/core'
 import { StatusError } from 'itty-router-extras'
 
-import { handleResponse } from "../../../../helpers/utils"
+import { handleResponse } from "@/helpers/utils"
+import getIPFS from '@/helpers/getIPFS'
 
 export async function post({ params, platform, locals }) {
   const { env } = platform
@@ -71,7 +73,7 @@ export async function post({ params, platform, locals }) {
 
 export async function get({ params, url, platform, locals }) {
   const { env } = platform
-  const { POAP_CODES, POAP_CLAIMS } = env
+  const { POAPS, POAP_CODES, POAP_CLAIMS } = env
   const { issuer, code } = params
   const { pubkey } = locals
 
@@ -81,6 +83,24 @@ export async function get({ params, url, platform, locals }) {
     !poap?.metadata 
     || !poap?.value
   ) throw new StatusError(404, 'POAP Not Found')
+
+  // TEMP since we didn't have the `ext` param initially
+  ////
+  if (!poap.metadata.ext) {
+    const buffer = new Uint8Array(await getIPFS(poap.metadata.ipfshash))
+    const { ext, mime } = await fileTypeFromBuffer(buffer)
+    const metadata = {
+      ...poap.metadata,
+      ext, 
+      mime
+    }
+
+    await Promise.all([
+      POAPS.put(`${metadata.author}:${issuer}`, metadata.hash, { metadata }),
+      POAP_CODES.put(`${code}:${issuer}`, 'OK', { metadata })
+    ])
+  }
+  ////
 
   const claimed = !!await POAP_CLAIMS.get(`${pubkey}:${issuer}`)
 
