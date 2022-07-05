@@ -58,7 +58,7 @@
   <label class="mb-2 flex items-center">
     Code
     <input class="border border-black rounded px-1 mx-1" type="text" name="code" bind:value={code}>
-    <span class="text-xs">Max {origin.indexOf('.testnet.') > -1 ? 5 : 12} characters</span>
+    <span class="text-xs">Max {origin.indexOf('testnet') > -1 ? 7 : 12} characters</span>
   </label>
 
   <label class="mb-2">
