@@ -38,7 +38,7 @@ github="tyvdh"
 ${keys.map((key) => `[[CURRENCIES]]
 code="${key.metadata.code}"
 issuer="${key.metadata.issuer}"
-image="${url.protocol}//poap.${domain.join('.')}/ipfs/${key.metadata.ipfshash}.${key.metadata.ext}"`
+image="${url.protocol}//${domain.join('.')}/ipfs/${key.metadata.ipfshash}.${key.metadata.ext}"`
 ).join('\n\n')}
 `
 

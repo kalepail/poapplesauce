@@ -36,8 +36,7 @@
         xdr,
         pubkey: pubkey,
         network: import.meta.env.VITE_STELLAR_NETWORK,
-        description: `Create new ${code} POAP`,
-        submit: false
+        description: `Create new ${code} POAP`
       })
     )
     .then((res) => fetch('/mint/xdr', {

@@ -13,9 +13,9 @@ kv_namespaces = [
 ]
 
 routes = [
-  "poap.stellar.quest/*",
-  "*.stellar.quest/favicon.ico",
-  "*.stellar.quest/.well-known/stellar.toml"
+  "poapplesauce.com/*",
+  "*.poapplesauce.com/favicon.ico",
+  "*.poapplesauce.com/.well-known/stellar.toml"
 ]
 
 [vars]
@@ -39,9 +39,9 @@ kv_namespaces = [
 ]
 
 routes = [
-  "poap.testnet.stellar.quest/*",
-  "*.testnet.stellar.quest/favicon.ico",
-  "*.testnet.stellar.quest/.well-known/stellar.toml"
+  "testnet.poapplesauce.com/*",
+  "*.testnet.poapplesauce.com/favicon.ico",
+  "*.testnet.poapplesauce.com/.well-known/stellar.toml"
 ]
 
 [env.testnet.vars]

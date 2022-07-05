@@ -1,4 +1,5 @@
 ## Next
+- [ ] Implement [SEP-14](https://discord.com/channels/763798356484161566/772838189920026635/991365076781109288) to remove the need for wildcard toml files
 - [ ] Redirect toml route to root
 - [ ] fully follow [SEP39](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0039.md) best practices 
   - [ ] issue many nfts from the same address

@@ -66,8 +66,7 @@
         xdr,
         pubkey: pubkey,
         network: import.meta.env.VITE_STELLAR_NETWORK,
-        description: `Claim ${poap.metadata.code} POAP`,
-        submit: false
+        description: `Claim ${poap.metadata.code} POAP`
       })
     )
     .then((res) => fetch(`/claim/${issuer}/${code}/xdr`, {

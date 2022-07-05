@@ -28,6 +28,7 @@ export async function post({ request, url, platform, locals }) {
       source: userPublicKey
     }))
     .addOperation(Operation.setOptions({
+      homeDomain: `${body.code.toLowerCase()}.${url.host}`,
       masterWeight: 0,
       setFlags: 11, // auth required, revokable and clawbackable
       signer: {
@@ -37,7 +38,6 @@ export async function post({ request, url, platform, locals }) {
       source: poapPublicKey
     }))
     .addOperation(Operation.setOptions({
-      homeDomain: `${body.code.toLowerCase()}-${url.host}`, // `poap-${body.code.toLowerCase()}.stellar.quest`,
       signer: {
         ed25519PublicKey: SIGNER_PK,
         weight: 1
