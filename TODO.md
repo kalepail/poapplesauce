@@ -16,6 +16,7 @@
 - [ ] Clawback claimed poaps
 - [ ] Delete pending poap claims
 
+## Done
 - [x] @stellar.org email gateway for minting on PUBLIC
 - [x] better error reporting
 - [x] Shorter POAP claim link
