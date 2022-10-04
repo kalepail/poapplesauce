@@ -15,6 +15,23 @@
 </script>
 
 <main class="flex flex-col w-screen p-2 place-content-center text-white">
+  <header class="fixed z-0 top-0 p-12" style:left="50%" style:transform="translate(-50%, 0)" style:width="100%" style:max-width="1440px">
+    <h1>
+      <a class="flex items-center" href="/">
+        <img class="mr-2" src="/stellar-wordmark.svg">
+        <span class="text-xs bg-white text-black rounded-full px-2 py-1">{import.meta.env.VITE_STELLAR_NETWORK}</span>
+      </a>
+    </h1>
+  
+    <!-- <div class="ml-auto">
+      {#if pubkey}
+        <button on:click={logout}>Logout</button>
+      {:else}
+        <button on:click={login}>Login</button>
+      {/if}
+    </div> -->
+  </header>
+
   <img class="fixed z-0" style:left="50%" style:top="50%" style:transform="translate(-50%, -50%)" src="/star-ring.svg">
 
   <div class="relative z-1 flex flex-col items-center self-center">
@@ -24,7 +41,7 @@
     <div class="mt-14">
       {#if pubkey}
         {#if claimed}
-          <span class="h-12 px-6 flex justify-center items-center" style:background-color="#3E1BDB">Claimed</span>
+          <span class="h-12 px-6 flex justify-center items-center" style:background-color="#3E1BDB">✔ &nbsp; Claimed</span>
         {:else}
           <button class="h-12 px-6 flex justify-center items-center" style:min-width="300px" style:background-color="#3E1BDB" on:click={claim}>
             {loading ? '...' : 'Claim Now!'}
