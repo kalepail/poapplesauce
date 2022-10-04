@@ -32,7 +32,7 @@
     </div> -->
   </header>
 
-  <img class="fixed z-0" style:left="50%" style:top="50%" style:transform="translate(-50%, -50%)" src="/star-ring.svg">
+  <img class="fixed z-0 p-6" style:left="50%" style:top="50%" style:transform="translate(-50%, -50%)" src="/star-ring.svg">
 
   <div class="relative z-1 flex flex-col items-center self-center">
     <h1 class="text-center" style:line-height="1.2em" style:font-size="40px" style:font-weight="400">Claim Your <br> Stellar Ranger NFT</h1>
