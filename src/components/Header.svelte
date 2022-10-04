@@ -1,8 +1,8 @@
 <script context="module">
   let albedo
 
-  export function login() {
-    return albedo.publicKey()
+  export function login(a = albedo) {
+    return a.publicKey()
     .then((res) => fetch('/', {
       method: 'POST',
       headers: {
