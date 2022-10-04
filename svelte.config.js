@@ -36,7 +36,7 @@ const config = {
 				}
 			},
 			optimizeDeps: {
-				exclude: ['file-type'],
+				// exclude: ['file-type'],
 				esbuildOptions: {
 					define: {
 						global: 'globalThis'
