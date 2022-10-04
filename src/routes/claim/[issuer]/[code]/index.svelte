@@ -25,6 +25,8 @@
       throw err
     })
 
+    props.poapism = session.poapism
+
     return {
       status: 200,
       props
@@ -37,6 +39,10 @@
 
   import { login } from '@/components/Header.svelte'
 
+  import ClaimDefault from "@/components/claim/ClaimDefault.svelte";
+  import ClaimRanger from "@/components/claim/ClaimRanger.svelte";
+
+  export let poapism
   export let pubkey
   export let issuer
   export let code
@@ -77,22 +83,20 @@
     .then(() => claimed = true)
     .finally(() => loading = false)
   }
+
+  function isRangerNFT() {
+    const rangerAddresses = [
+      'GBS54CYAZ4I7SQEYG4VWW3HOA6ONNB3NM54ZM3ZS2I62T6VPNDO5IL6K',
+      'GCTZLWO5OX2FVR7YQDBD7NDL7HQTIH2NZEJ36Q5YC6SE6QTYHNW76G5U',
+      'GCT5IKQ6JYYU3YQZEHFHNZDHG6QA6IPZGAQFRGO3QS4I7M2DZPULISXB',
+    ]
+      
+    return rangerAddresses.includes(issuer)
+  }
 </script>
 
-<h1 class="mb-2">Claim POAP</h1>
-
-<img class="mr-2 self-start" style:max-width="calc(16px * 4)" src="{origin}/ipfs/{poap.metadata.ipfshash}">
-<div class="flex flex-col items-start">
-  <span>{poap.metadata.code}</span>
-  <span>{poap.metadata.issuer}</span>
-
-  {#if pubkey}
-    {#if claimed}
-      <span class="bg-green-500 text-white px-2 h-8 flex items-center rounded mt-1">Claimed</span>
-    {:else}
-      <button class="bg-black text-white px-2 h-8 flex items-center rounded mt-1" on:click={claim}>{loading ? '...' : 'Claim'}</button>
-    {/if}
-  {:else}
-    <button class="bg-black text-white px-2 h-8 flex items-center rounded mt-1" on:click={login}>Login</button>
-  {/if}
-</div>
+{#if isRangerNFT()}
+  <ClaimRanger {albedo} {loading} {poapism} {pubkey} {issuer} {code} {poap} {origin} {claimed} {claim} {login} />
+{:else}
+  <ClaimDefault {albedo} {loading} {poapism} {pubkey} {issuer} {code} {poap} {origin} {claimed} {claim} {login} />
+{/if}
