@@ -36,9 +36,9 @@
 
   <div class="relative z-1 flex flex-col items-center self-center">
     <h1 class="text-center" style:line-height="1.2em" style:font-size="40px" style:font-weight="400">Claim Your <br> Stellar Ranger NFT</h1>
-    <img class="mt-8" style:max-width="calc(16px * 6)" style:box-shadow="0 0 0 1rem black, 0 0 0 1.3rem white" src="{origin}/ipfs/{poap.metadata.ipfshash}">
+    <img class="mt-10" style:max-width="calc(16px * 6)" style:box-shadow="0 0 0 1rem black, 0 0 0 1.3rem white" src="{origin}/ipfs/{poap.metadata.ipfshash}">
   
-    <div class="mt-14">
+    <div class="mt-16">
       {#if pubkey}
         {#if claimed}
           <span class="h-12 px-6 flex justify-center items-center" style:background-color="#3E1BDB">✔ &nbsp; Claimed</span>
