@@ -1,7 +1,7 @@
 <script context="module">
   let albedo
 
-  export function login(a = albedo) {
+  export function login(_, a = albedo) {
     return a.publicKey()
     .then((res) => fetch('/', {
       method: 'POST',

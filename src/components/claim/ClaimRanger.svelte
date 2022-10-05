@@ -48,7 +48,7 @@
           </button>
         {/if}
       {:else}
-        <button class="h-12 px-6 flex justify-center items-center" style:background-color="#3E1BDB" on:click={login(albedo)}>Login</button>
+        <button class="h-12 px-6 flex justify-center items-center" style:background-color="#3E1BDB" on:click={(e) => login(e, albedo)}>Login</button>
       {/if}
     </div>
   </div>
