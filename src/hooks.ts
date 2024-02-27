@@ -12,6 +12,7 @@ export async function handle({ event, resolve }) {
 
   event.platform = await cloudflareAdapterPlatform(platform)
 	locals.pubkey = cookies.pubkey
+  locals.wallet = cookies.wallet
 
   const { context } = event.platform
   const cache = caches.default
@@ -53,13 +54,14 @@ export async function handleError({ error, event }) {
 /** @type {import('@sveltejs/kit').GetSession} */
 export function getSession(event) {
   const { locals } = event
-  const { pubkey } = locals
+  const { pubkey, wallet } = locals
 
   // https://github.com/sveltejs/kit/issues/4274
-  const poapism = poapisms[Math.floor(Math.random() * poapisms.length)] 
+  const poapism = poapisms[Math.floor(Math.random() * poapisms.length)]   
 
   return {
     pubkey,
+    wallet,
     poapism
   }
 }

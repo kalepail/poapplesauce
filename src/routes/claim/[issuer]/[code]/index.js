@@ -75,7 +75,7 @@ export async function get({ params, url, platform, locals }) {
   const { env } = platform
   const { POAPS, POAP_CODES, POAP_CLAIMS } = env
   const { issuer, code } = params
-  const { pubkey } = locals
+  const { pubkey, wallet } = locals
 
   const poap = await POAP_CODES.getWithMetadata(`${code}:${issuer}`)
 
@@ -108,6 +108,7 @@ export async function get({ params, url, platform, locals }) {
     status: 200,
     body: {
       pubkey,
+      wallet,
       issuer,
       code,
       poap,

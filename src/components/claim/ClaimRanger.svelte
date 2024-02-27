@@ -1,9 +1,11 @@
 <script>
-  export let albedo
+  import { login } from '@/components/Header.svelte'
+
   export let loading
 
   export let poapism
   export let pubkey
+  export let wallet
   export let issuer
   export let code
   export let poap
@@ -11,7 +13,6 @@
   export let claimed
 
   export let claim
-  export let login
 </script>
 
 <main class="flex flex-col w-screen p-2 place-content-center text-white">
@@ -48,7 +49,7 @@
           </button>
         {/if}
       {:else}
-        <button class="h-12 px-6 flex justify-center items-center" style:background-color="#3E1BDB" on:click={(e) => login(e, albedo)}>Login</button>
+        <button class="h-12 px-6 flex justify-center items-center" style:background-color="#3E1BDB" on:click={login}>Login</button>
       {/if}
     </div>
   </div>

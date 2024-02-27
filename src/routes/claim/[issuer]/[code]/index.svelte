@@ -35,27 +35,21 @@
 </script>
 
 <script>
-  import { onMount } from "svelte";
-
-  import { login } from '@/components/Header.svelte'
+  import { kit } from '@/components/Header.svelte'
 
   import ClaimDefault from "@/components/claim/ClaimDefault.svelte";
   import ClaimRanger from "@/components/claim/ClaimRanger.svelte";
 
   export let poapism
   export let pubkey
+  export let wallet
   export let issuer
   export let code
   export let poap
   export let origin
   export let claimed
 
-  let albedo
   let loading = false
-
-  onMount(async () => {
-    albedo = await import('@albedo-link/intent').then((pkg) => pkg.default)
-  })
 
   function claim() {
     loading = true
@@ -68,11 +62,10 @@
     })
     .then(handleResponse)
     .then((xdr) => 
-      albedo.tx({
+      kit.signTx({
         xdr,
-        pubkey: pubkey,
-        network: import.meta.env.VITE_STELLAR_NETWORK,
-        description: `Claim ${poap.metadata.code} POAP`
+        publicKeys: [pubkey],
+        network: kit.network
       })
     )
     .then((res) => fetch(`/claim/${issuer}/${code}/xdr`, {
@@ -96,7 +89,7 @@
 </script>
 
 {#if isRangerNFT()}
-  <ClaimRanger {albedo} {loading} {poapism} {pubkey} {issuer} {code} {poap} {origin} {claimed} {claim} {login} />
+  <ClaimRanger {loading} {poapism} {pubkey} {wallet} {issuer} {code} {poap} {origin} {claimed} {claim} />
 {:else}
-  <ClaimDefault {albedo} {loading} {poapism} {pubkey} {issuer} {code} {poap} {origin} {claimed} {claim} {login} />
+  <ClaimDefault {loading} {poapism} {pubkey} {wallet} {issuer} {code} {poap} {origin} {claimed} {claim} />
 {/if}

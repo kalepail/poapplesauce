@@ -1,11 +1,11 @@
 <script>
   import Header from "../Header.svelte";
 
-  export let albedo
   export let loading
 
   export let poapism
   export let pubkey
+  export let wallet
   export let issuer
   export let code
   export let poap
@@ -17,7 +17,7 @@
 </script>
 
 <main class="flex flex-col w-screen p-2">
-  <Header {poapism} {pubkey} />
+  <Header {poapism} {pubkey} {wallet} />
 
   <h1 class="mb-2">Claim POAP</h1>
 

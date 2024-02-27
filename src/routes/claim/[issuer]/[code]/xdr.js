@@ -9,7 +9,7 @@ export async function post({ request, params, platform }) {
   const body = await request.json()
 
   const poapKeypair = Keypair.fromSecret(SIGNER_SK)
-  const transaction = new Transaction(body.signed_envelope_xdr, Networks[STELLAR_NETWORK])
+  const transaction = new Transaction(body.result, Networks[STELLAR_NETWORK])
 
   const poap = await POAP_CODES.getWithMetadata(`${code}:${issuer}`)
 

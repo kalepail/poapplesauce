@@ -5,6 +5,7 @@
       status: 200,
       props: {
         pubkey: session.pubkey,
+        wallet: session.wallet,
         poapism: session.poapism,
         origin: url.origin
       }
@@ -20,6 +21,7 @@
   import Header from "../components/Header.svelte"
 
   export let pubkey
+  export let wallet
   export let poapism
   export let origin
 </script>
@@ -30,7 +32,7 @@
 </svelte:head>
 
 <main class="flex flex-col w-screen p-2">
-  <Header {poapism} {pubkey} />
+  <Header {poapism} {pubkey} {wallet} />
   <slot />
 </main>
 

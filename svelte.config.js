@@ -54,7 +54,7 @@ const config = {
 						inject({
 							util: 'util',
 							window: path.resolve('src/helpers/window.js'),
-							Buffer: ['buffer', 'Buffer']
+							Buffer: ['Buffer', 'Buffer'],
 						}),
 					]
 				}

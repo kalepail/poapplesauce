@@ -1,7 +1,7 @@
 name = "poapplesauce"
 main = "worker-site/worker.mjs"
 usage_model = "bundled"
-compatibility_flags = []
+compatibility_flags = ['nodejs_compat']
 workers_dev = false
 compatibility_date = "2022-06-30"
 

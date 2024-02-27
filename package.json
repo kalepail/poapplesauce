@@ -13,8 +13,7 @@
 		"deploy:all": "pnpm deploy:dev && pnpm run deploy"
 	},
 	"devDependencies": {
-		"@albedo-link/intent": "^0.12.0",
-		"@albedo-link/signature-verification": "^0.1.2",
+		"@creit.tech/stellar-wallets-kit": "^0.6.1",
 		"@esbuild-plugins/node-globals-polyfill": "^0.1.1",
 		"@rollup/plugin-inject": "^4.0.4",
 		"@sveltejs/adapter-cloudflare-workers": "1.0.0-next.46",

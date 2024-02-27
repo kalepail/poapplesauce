@@ -1,21 +1,21 @@
 <script>
   import { dev } from '$app/env'
-  import { onMount } from "svelte";
+  // import { onMount } from "svelte";
 
+  import { kit } from '@/components/Header.svelte'
   import { handleResponse } from "@/helpers/utils";
 
   export let pubkey
   export let origin
 
-  let albedo
   let loading = false
 
   $: code = dev ? 'NFT' : ''
   $: ipfshash = dev ? 'bafkreih6y2dzkizcqbw7piirjvmrolomtuszt6wrg4l5rr56o4ivxcikxy' : ''
 
-  onMount(async () => {
-    albedo = await import('@albedo-link/intent').then((pkg) => pkg.default)
-  })
+  // onMount(async () => {
+  //   albedo = await import('@albedo-link/intent').then((pkg) => pkg.default)
+  // })
 
   function submit() {
     loading = true
@@ -32,11 +32,10 @@
     })
     .then(handleResponse)
     .then((xdr) => 
-      albedo.tx({
+      kit.signTx({
         xdr,
-        pubkey: pubkey,
-        network: import.meta.env.VITE_STELLAR_NETWORK,
-        description: `Create new ${code} POAP`
+        publicKeys: [pubkey],
+        network: kit.network
       })
     )
     .then((res) => fetch('/mint/xdr', {

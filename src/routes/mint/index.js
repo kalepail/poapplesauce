@@ -70,12 +70,13 @@ export async function post({ request, url, platform, locals }) {
 }
 
 export async function get({ url, locals }) {
-  const { pubkey } = locals
+  const { pubkey, wallet } = locals
 
   if (pubkey) return {
     status: 200,
     body: {
       pubkey,
+      wallet,
       origin: url.origin
     }
   }
